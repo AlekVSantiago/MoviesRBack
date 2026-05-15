@@ -13,6 +13,13 @@ public class User {
 		this.password = password;
 	}
 	
+	User(){
+		this.name = "default";
+		this.password = "password";
+		this.birthdate = new Date();
+		
+	}
+	
 	public String getName() {
 		return this.name;
 	}

@@ -5,11 +5,18 @@ import java.util.Date;
 
 public class Movie {
 	public enum Genre{
-		HORROR, SCIFI, WESTERN, FANTASY, ADVENTURE, SPY,
+		HORROR, SCIFI, WESTERN, FANTASY, ADVENTURE, ACTION, NONE 
 	}
+	public enum Rating{
+		LIKE, DISLIKE, NEUTRAL
+	}
+	
+	
 	private String name;
 	private Date date;
 	private int runtime;
+	private Genre genre;
+	private Rating rating;
 	private ArrayList<Crew> crew;
 	
 	
@@ -17,6 +24,8 @@ public class Movie {
 		this.name = name;
 		this.date = date;
 		this.runtime = runtime;
+		this.genre = Movie.Genre.NONE;
+		this.rating = Movie.Rating.NEUTRAL;
 		this.crew = new ArrayList<Crew>();
 	}
 	public String getName() {
@@ -31,6 +40,12 @@ public class Movie {
 	public ArrayList<Crew> getCrew(){
 		return this.crew;
 	}
+	public Genre getGenre() {
+		return this.genre;
+	}
+	public Rating getRating() {
+		return this.rating;
+	}
 	
 	public void setName(String name) {
 		this.name = name;
@@ -41,6 +56,13 @@ public class Movie {
 	public void setRuntime(int runtime) {
 		this.runtime = runtime;
 	}
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+	public void setRating(Rating rating) {
+		this.rating = rating;
+	}
+	
 	
 	public static void main(String[] args) {
 		
