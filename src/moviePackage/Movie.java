@@ -13,26 +13,28 @@ public class Movie {
 	
 	
 	private String name;
-	private Date date;
+	private Date release;
+	private ArrayList<Crew> crew;
 	private int runtime;
 	private Genre genre;
 	private Rating rating;
-	private ArrayList<Crew> crew;
 	
 	
-	Movie(String name, Date date, int runtime){
+	Movie(String name, Date date, int runtime, Genre genre, Rating rating){
 		this.name = name;
-		this.date = date;
+		this.release = date;
 		this.runtime = runtime;
-		this.genre = Movie.Genre.NONE;
-		this.rating = Movie.Rating.NEUTRAL;
+		this.genre = genre;
+		this.rating = rating;
 		this.crew = new ArrayList<Crew>();
 	}
+	
+	
 	public String getName() {
 		return this.name;
 	}
-	public Date getDate() {
-		return this.date;
+	public Date getRelease() {
+		return this.release;
 	}
 	public int getRuntime() {
 		return this.runtime;
@@ -50,8 +52,8 @@ public class Movie {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setRelease(Date date) {
+		this.release = date;
 	}
 	public void setRuntime(int runtime) {
 		this.runtime = runtime;
@@ -72,7 +74,7 @@ public class Movie {
 	public String toString() {
 		String result = "";
 		result += "Name: " + this.getName() + "\n";
-		result += "Release Date: " + this.getDate()+ "\n";
+		result += "Release Date: " + this.getRelease().toString() + "\n";
 		result += "Rumtime: " + this.getRuntime()+ "\n";
 		return result;
 	}
