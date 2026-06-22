@@ -6,13 +6,11 @@ public class User {
 	private String name;
 	private Date birthdate;
 	private String password;
-	private MoviesRModel model;
 	
 	User(String name, Date birthdate, String password){
 		this.name = name;
 		this.birthdate = birthdate;
 		this.password = password;
-		this.model = new MoviesRModel();
 	}
 	
 	User(){
@@ -35,9 +33,6 @@ public class User {
 		System.out.println("Age has not been implemented yet"); //No implementation of the age yet
 		return 1;
 	}
-	public MoviesRModel getModel() {
-		return this.model;
-	}
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -46,9 +41,6 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public void setModel(MoviesRModel model) {
-		this.model = model;
 	}
 		
 }

@@ -1,47 +1,65 @@
 package moviePackage;
+/*
+This is supposed to be an encapsulation of the operations and what they are operatiing on within an object of certain fields
+Hopefully every field is enough. According to what you would need to make this work This should be it
 
+			(EMAIL(Who)-------------Operation(What)--------------Object(Where))
+ */
 public class MoviesRMessage{
-	private User user;
-	private Operation operation;
-	private Movie movie;
+	private String email; //Who is doing the operation and on what account
+	private Operation operation; //Enum which is defined below. More operations should be able to be added as needed
+	private Object obj;
+	
 	
 	public enum Operation{
-		VERIFY, INITIALIZE, RATING, UPDATE
+		LOGIN, SELECT, PLAY
 	}
 	
-	MoviesRMessage(User user, Operation operation, Movie movie){
-		this.user = user;
+	MoviesRMessage(String email, Operation operation, Object obj){
+		this.email = email;
 		this.operation = operation;
-		this.movie = movie;
+		if(obj instanceof String) {
+			this.obj = (String) obj;
+		}
+		else if(obj instanceof Movie) {
+			this.obj = (Movie) obj;
+		}
+		else {
+			System.out.println("Something is here that should not be");
+			System.exit(0);
+		}
+		
 	}
-	public User getUser() {
-		return this.user;
+	public String getEmail() {
+		return email;
 	}
+	
 	public Operation getOperation() {
 		return this.operation;
 	}
-	public Movie getMovie() {
-		return this.movie;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	
+	public Object getObject() {
+		return this.obj;
 	}
 	public void setOperation(Operation operation) {
 		this.operation = operation;
 	}
-	public void setMovie(Movie movie) {
-		this.movie = movie;
+	public void setMovie(Object obj) {
+		this.obj = obj;
 	}
 	
 	@Override
 	public String toString() {
-		String result = "";
-		result += this.user.toString();
-		result += this.operation;
-		result += this.movie.toString();
+		
+		String result = "Operation message \n";
+		result += "Email: " + this.email + "\n";
+		result += "Operation: " + this.operation + "\n";
+		if(this.obj instanceof Movie) {
+			result += "Movie: " + this.obj.toString();
+		}
+		else if(this.obj instanceof String) {
+			result += "String: " + this.obj;
+		}
 		return result;
 	}
-	
-	
+
 }

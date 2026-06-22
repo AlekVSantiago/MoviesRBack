@@ -3,6 +3,7 @@ package moviePackage;
 import java.util.ArrayList;
 
 public class MoviesRModel {
+	private User user;
 	private ArrayList<Movie> movies;
 	private ArrayList<Movie> myList;
 	
@@ -16,6 +17,12 @@ public class MoviesRModel {
 		this.myList = new ArrayList<Movie>();
 	}
 	
+	public User getUser() {
+		return this.user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public ArrayList<Movie> getMovies() {
 		return this.movies;
 	} 

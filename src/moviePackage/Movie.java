@@ -14,10 +14,8 @@ public class Movie {
 	
 	private String name;
 	private Date release;
-	private ArrayList<Crew> crew;
 	private int runtime;
 	private Genre genre;
-	private Rating rating;
 	
 	
 	Movie(String name, Date date, int runtime, Genre genre, Rating rating){
@@ -25,8 +23,13 @@ public class Movie {
 		this.release = date;
 		this.runtime = runtime;
 		this.genre = genre;
-		this.rating = rating;
-		this.crew = new ArrayList<Crew>();
+	}
+	
+	Movie(){
+		this.name = "nothing";
+		this.release = new Date(12,12,12);
+		this.runtime = 121;
+		this.genre = Genre.NONE;
 	}
 	
 	
@@ -39,15 +42,10 @@ public class Movie {
 	public int getRuntime() {
 		return this.runtime;
 	}
-	public ArrayList<Crew> getCrew(){
-		return this.crew;
-	}
 	public Genre getGenre() {
 		return this.genre;
 	}
-	public Rating getRating() {
-		return this.rating;
-	}
+
 	
 	public void setName(String name) {
 		this.name = name;
@@ -60,9 +58,6 @@ public class Movie {
 	}
 	public void setGenre(Genre genre) {
 		this.genre = genre;
-	}
-	public void setRating(Rating rating) {
-		this.rating = rating;
 	}
 	
 	

@@ -12,9 +12,8 @@ import javafx.application.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.*;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import moviePackage.Movie.Genre;
@@ -25,25 +24,26 @@ import javafx.scene.paint.*;
 public class MoviesRView extends Application implements Observer {
 	@Override
 	public void start(Stage arg0) throws Exception {
-		Movie terminatorTest = new Movie("Terminator 2: Judgment Day", new Date(7, 3, 1991), 137, Genre.ACTION, Rating.LIKE);
-		Socket socket = new Socket("localHost", 1313);
-		ObjectOutputStream out = new  ObjectOutputStream(socket.getOutputStream());
-		out.flush();
-		ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-		out.writeObject(new MoviesRMessage(new User(),Operation.INITIALIZE, terminatorTest));
-		in.readObject();
-		
 		BorderPane root = new BorderPane();
+		GridPane movieGrid = new GridPane();
+		Rectangle rectangle = new Rectangle();
+		rectangle.setHeight(40);
+		rectangle.setWidth(20);
+
 		
 		
 		
-		Scene scene = new Scene(root, 300, 300);
+		Scene scene = new Scene(root, 1000, 1000);
 		Stage stage = new Stage();
 		stage.setScene(scene);
 		stage.setTitle("Movies R Back");
 		stage.show();
 	}
 
+	public void login(){
+
+
+	}
 	@Override
 	public void update(Observable o, Object arg) {
 		
