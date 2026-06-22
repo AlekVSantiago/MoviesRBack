@@ -1,6 +1,10 @@
 package moviePackage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
 
 public class MoviesRModel {
 	private User user;
@@ -10,13 +14,44 @@ public class MoviesRModel {
 	MoviesRModel(User user, ArrayList<Movie> movies){
 		this.movies = movies;
 	}
-	
-	//This should be constructing through the server that is set up
-	MoviesRModel(){
-		this.movies = new ArrayList<Movie>();
+
+	MoviesRModel(String file) throws FileNotFoundException {
+		this.user = new User();
+		this.movies = initializeLibrary(file);
 		this.myList = new ArrayList<Movie>();
 	}
-	
+
+	/*
+	Example to draw fron of the csvFile
+	Star_Wars_(4K77)	George_Lucas	SciFi	5/25/1977	121
+	 */
+	public ArrayList<Movie> initializeLibrary(String fileString) throws FileNotFoundException {
+		ArrayList<Movie> result = new ArrayList<Movie>();
+
+		File file = new File(fileString);
+		Scanner scanner = new Scanner(file);
+
+		while(scanner.hasNextLine()){
+			String currString = scanner.nextLine();
+			String[] cols = currString.split(" ");
+			/*
+			Initialize
+			 */
+			String movieName = cols[0].replace('_', ' ');
+			String movieDirector = cols[1].replace('_', ' ');
+			Movie.Genre movieGenre = MoviesRController.stringToGenre(cols[2]);
+			/*
+			little work for the release date
+			 */
+			String[] dateNumbers = cols[3].split("/");
+
+			Date movieReleaseDate = new Date(Integer.valueOf(dateNumbers[0]), Integer.valueOf(dateNumbers[1]), Integer.valueOf(dateNumbers[2]));
+
+			int runtime = Integer.valueOf(cols[4]);
+			result.add(new Movie(movieName, movieDirector, movieGenre, movieReleaseDate, runtime));
+		}
+        return result;
+    }
 	public User getUser() {
 		return this.user;
 	}

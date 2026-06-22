@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Movie {
 	public enum Genre{
-		HORROR, SCIFI, WESTERN, FANTASY, ADVENTURE, ACTION, NONE 
+		HORROR, SCIFI, WESTERN, FANTASY, ADVENTURE, ACTION, COMEDY, NONE
 	}
 	public enum Rating{
 		LIKE, DISLIKE, NEUTRAL
@@ -13,21 +13,26 @@ public class Movie {
 	
 	
 	private String name;
-	private Date release;
+
+
+
+	private String director;
+	private Date releaseDate;
 	private int runtime;
 	private Genre genre;
 	
 	
-	Movie(String name, Date date, int runtime, Genre genre, Rating rating){
+	Movie(String name, String director, Genre genre, Date date, int runtime){
 		this.name = name;
-		this.release = date;
+		this.director = director;
+		this.releaseDate = date;
 		this.runtime = runtime;
 		this.genre = genre;
 	}
 	
 	Movie(){
 		this.name = "nothing";
-		this.release = new Date(12,12,12);
+		this.releaseDate = new Date(12,12,12);
 		this.runtime = 121;
 		this.genre = Genre.NONE;
 	}
@@ -36,8 +41,15 @@ public class Movie {
 	public String getName() {
 		return this.name;
 	}
+	public String getDirector() {
+		return director;
+	}
+
+	public void setDirector(String director) {
+		this.director = director;
+	}
 	public Date getRelease() {
-		return this.release;
+		return this.releaseDate;
 	}
 	public int getRuntime() {
 		return this.runtime;
@@ -51,7 +63,7 @@ public class Movie {
 		this.name = name;
 	}
 	public void setRelease(Date date) {
-		this.release = date;
+		this.releaseDate = date;
 	}
 	public void setRuntime(int runtime) {
 		this.runtime = runtime;

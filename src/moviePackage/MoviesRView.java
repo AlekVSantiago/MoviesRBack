@@ -1,34 +1,92 @@
 package moviePackage;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
 import javafx.application.*;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
-import moviePackage.Movie.Genre;
-import moviePackage.Movie.Rating;
-import moviePackage.MoviesRMessage.Operation;
 import javafx.scene.paint.*;
 
 public class MoviesRView extends Application implements Observer {
 	@Override
 	public void start(Stage arg0) throws Exception {
+
+		MoviesRController controller = new MoviesRController("/Users/aleksantiago/Desktop/spreadSheets/Movies.csv");
+		ArrayList<Movie> library = controller.getModel().getMovies();
 		BorderPane root = new BorderPane();
+
+		/*
+		For the Top of the BorderPane
+		 */
+		GridPane topGrid = new GridPane(1000, 200);
+		topGrid.setVgap(200);
+		topGrid.setPadding(new Insets(20));
+
+		/*
+		Grid of movies
+		 */
 		GridPane movieGrid = new GridPane();
-		Rectangle rectangle = new Rectangle();
-		rectangle.setHeight(40);
-		rectangle.setWidth(20);
+		movieGrid.setHgap(20);
+		movieGrid.setVgap(10);
+		movieGrid.setPadding(new Insets(20));
+
+
+		/*
+		scrollPane for the movieGrid
+		 */
+		ScrollPane centerScroll = new ScrollPane(movieGrid);
+
+		/*
+		for loop initializing
+		the selectable movies
+
+		for(int i = 0; i < 5; i++){
+			for(int j = 0; j < 10; j++){
+				StackPane movieDisplayStack = new StackPane();
+				Rectangle inputRectangle = new Rectangle(100, 200);
+				inputRectangle.setStrokeWidth(9);
+				inputRectangle.setFill(Color.BLACK);
+				inputRectangle.setFill(Color.GRAY);
+
+				Label titleLabel = new Label("Title");
+				movieDisplayStack.getChildren().addAll(inputRectangle, titleLabel);
+
+				movieGrid.add(movieDisplayStack,i, j);
+			}
+		}
+		*/
+		int rowNumber = 0;
+		int colNumber = 0;
+
+		for(int i = 0; i < library.size(); i++){
+			StackPane movieDisplay = new StackPane();
+			/*TODO
+			Make this into a legitimate poster
+			  */
+			Rectangle posterPlaceHolder = new Rectangle(100, 200);
+			posterPlaceHolder.setFill(Color.GRAY);
+			posterPlaceHolder.setStroke(Color.BLUE);
+			posterPlaceHolder.setStrokeWidth(20);
+
+			Label movieLabel = new Label(library.get(i).getName());
+
+			movieDisplay.getChildren().addAll(posterPlaceHolder,movieLabel);
+
+
+		}
+
+
+		root.setTop(topGrid);
+		root.setCenter(centerScroll);
+
+
 
 		
 		

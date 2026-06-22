@@ -1,58 +1,38 @@
 package moviePackage;
 
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 
 import moviePackage.Movie.Genre;
-import moviePackage.MoviesRMessage.Operation;
 
 public class MoviesRController {
+
+
 	private MoviesRModel model;
-	
-	MoviesRController(MoviesRModel model){
-		this.model = model;
+
+	/*TODO
+	The fact that this parameter is passed into two layers of constructors is
+	absolutley madness and needs to be FIXED
+	 */
+	MoviesRController(String file) throws FileNotFoundException {
+		this.model = new MoviesRModel(file);
 	}
 
 
 
-	public static boolean login(String email, String password) {
-		try{
-			Socket socket = new Socket("localhost", 1313);
-			ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-			out.flush();
-			ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
-			out.writeObject(new MoviesRMessage(email, Operation.LOGIN, password));
-			boolean returnVerification = in.readBoolean();
-			return returnVerification;
-		}
-		/*
-		I don't think that any of these Exceptions are possible but you never know and they require me to put these here
-		 */
-		catch (UnknownHostException e){
-			System.out.println("login failed: Unknown Host");
-			e.printStackTrace();
-		}
-		catch (IOException j){
-			System.out.println("Login failed: Input Output Exception");
-			j.printStackTrace();
-		}
-
-
-	return false;}
-	//This is a sort of test method to just say that I am playing the movie 
-	
 	/*
 	 * Console based information display
 	 */
-	public void displayInfo(Movie selectedMovie) {
+	public void displayInfoConsole(Movie selectedMovie) {
 		System.out.println("Name: " + selectedMovie.getName());
 		System.out.println("Release Date: " + selectedMovie.getRelease());
 		System.out.println("Runtime: " + selectedMovie.getRuntime());
@@ -129,6 +109,34 @@ public class MoviesRController {
 		return (boolean) in.readObject();
 
 
+	}
+	////HORROR, SCIFI, WESTERN, FANTASY, ADVENTURE, ACTION, NONE
+	public static Genre stringToGenre(String genreString){
+		switch (genreString.toLowerCase()){
+			case "sci-fi":
+				return Genre.SCIFI;
+            case "horror":
+				return Genre.HORROR;
+            case "fantasy":
+				return Genre.FANTASY;
+            case "adventure":
+				return Genre.ADVENTURE;
+            case "action":
+				return Genre.ACTION;
+            case "comedy":
+				return Genre.COMEDY;
+			default:
+				return Genre.ACTION;
+		}
+	}
+
+
+	public MoviesRModel getModel() {
+		return model;
+	}
+
+	public void setModel(MoviesRModel model) {
+		this.model = model;
 	}
 
 }
