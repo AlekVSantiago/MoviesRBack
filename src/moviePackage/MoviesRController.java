@@ -25,6 +25,9 @@ public class MoviesRController {
 	MoviesRController(String file) throws FileNotFoundException {
 		this.model = new MoviesRModel(file);
 	}
+	MoviesRController(MoviesRModel model){
+		this.model = model;
+	}
 
 
 

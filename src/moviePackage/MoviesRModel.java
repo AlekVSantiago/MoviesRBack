@@ -19,6 +19,7 @@ public class MoviesRModel {
 		this.user = new User();
 		this.movies = initializeLibrary(file);
 		this.myList = new ArrayList<Movie>();
+
 	}
 
 	/*
@@ -33,7 +34,7 @@ public class MoviesRModel {
 
 		while(scanner.hasNextLine()){
 			String currString = scanner.nextLine();
-			String[] cols = currString.split(" ");
+			String[] cols = currString.split(",");
 			/*
 			Initialize
 			 */
@@ -45,7 +46,10 @@ public class MoviesRModel {
 			 */
 			String[] dateNumbers = cols[3].split("/");
 
-			Date movieReleaseDate = new Date(Integer.valueOf(dateNumbers[0]), Integer.valueOf(dateNumbers[1]), Integer.valueOf(dateNumbers[2]));
+			int month = Integer.valueOf(dateNumbers[0]);
+			int day = Integer.valueOf(dateNumbers[1]);
+			int year = Integer.valueOf(dateNumbers[2]);
+			Date movieReleaseDate = new Date(month, day, year);
 
 			int runtime = Integer.valueOf(cols[4]);
 			result.add(new Movie(movieName, movieDirector, movieGenre, movieReleaseDate, runtime));

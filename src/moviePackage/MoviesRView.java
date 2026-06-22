@@ -18,7 +18,8 @@ public class MoviesRView extends Application implements Observer {
 	@Override
 	public void start(Stage arg0) throws Exception {
 
-		MoviesRController controller = new MoviesRController("/Users/aleksantiago/Desktop/spreadSheets/Movies.csv");
+		MoviesRModel model = new MoviesRModel("/Users/aleksantiago/Desktop/spreadSheets/Movies.csv");
+		MoviesRController controller = new MoviesRController(model);
 		ArrayList<Movie> library = controller.getModel().getMovies();
 		BorderPane root = new BorderPane();
 
