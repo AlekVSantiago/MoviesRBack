@@ -22,6 +22,8 @@ public class MoviesRView extends Application implements Observer {
 		MoviesRController controller = new MoviesRController(model);
 		ArrayList<Movie> library = controller.getModel().getMovies();
 		BorderPane root = new BorderPane();
+		//Meant for the side of the screen, This is for things like search, home, settings, etc
+		VBox controlTabs = new VBox(9);
 
 		/*
 		For the Top of the BorderPane
@@ -43,26 +45,6 @@ public class MoviesRView extends Application implements Observer {
 		scrollPane for the movieGrid
 		 */
 		ScrollPane centerScroll = new ScrollPane(movieGrid);
-
-		/*
-		for loop initializing
-		the selectable movies
-
-		for(int i = 0; i < 5; i++){
-			for(int j = 0; j < 10; j++){
-				StackPane movieDisplayStack = new StackPane();
-				Rectangle inputRectangle = new Rectangle(100, 200);
-				inputRectangle.setStrokeWidth(9);
-				inputRectangle.setFill(Color.BLACK);
-				inputRectangle.setFill(Color.GRAY);
-
-				Label titleLabel = new Label("Title");
-				movieDisplayStack.getChildren().addAll(inputRectangle, titleLabel);
-
-				movieGrid.add(movieDisplayStack,i, j);
-			}
-		}
-		*/
 		int rowNumber = 0;
 		int colNumber = 0;
 
@@ -72,15 +54,22 @@ public class MoviesRView extends Application implements Observer {
 			Make this into a legitimate poster
 			  */
 			Rectangle posterPlaceHolder = new Rectangle(100, 200);
-			posterPlaceHolder.setFill(Color.GRAY);
+			posterPlaceHolder.setFill(Color.BEIGE);
 			posterPlaceHolder.setStroke(Color.BLUE);
-			posterPlaceHolder.setStrokeWidth(20);
+			posterPlaceHolder.setStrokeWidth(3);
 
 			Label movieLabel = new Label(library.get(i).getName());
+			movieLabel.setMaxWidth(60);
 
 			movieDisplay.getChildren().addAll(posterPlaceHolder,movieLabel);
-
-
+			movieGrid.add(movieDisplay, colNumber, rowNumber);
+			if(colNumber == 4){
+				colNumber = 0;
+				rowNumber++;
+			}
+			else{
+				colNumber++;
+			}
 		}
 
 
@@ -89,10 +78,7 @@ public class MoviesRView extends Application implements Observer {
 
 
 
-		
-		
-		
-		Scene scene = new Scene(root, 1000, 1000);
+		Scene scene = new Scene(root, 1000, 1000, Color.BLACK);
 		Stage stage = new Stage();
 		stage.setScene(scene);
 		stage.setTitle("Movies R Back");

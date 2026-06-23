@@ -31,9 +31,9 @@ public class MoviesRModel {
 
 		File file = new File(fileString);
 		Scanner scanner = new Scanner(file);
-
+		String currString = scanner.nextLine();
 		while(scanner.hasNextLine()){
-			String currString = scanner.nextLine();
+			currString = scanner.nextLine();
 			String[] cols = currString.split(",");
 			/*
 			Initialize
