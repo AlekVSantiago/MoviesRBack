@@ -8,9 +8,13 @@ import java.util.Scanner;
 
 public class MoviesRModel {
 	private User user;
+	private View viewMode;
 	private ArrayList<Movie> movies;
 	private ArrayList<Movie> myList;
-	
+
+
+
+    public enum View{ LIBRARY, }
 	MoviesRModel(User user, ArrayList<Movie> movies){
 		this.movies = movies;
 	}
@@ -24,7 +28,8 @@ public class MoviesRModel {
 
 	/*
 	Example to draw fron of the csvFile
-	Star_Wars_(4K77)	George_Lucas	SciFi	5/25/1977	121
+	Star_Wars_(4K77)	George_Lucas	SciFi	5/25/1977	 121	*Location
+	0					    1			  2		  3			  4		  5
 	 */
 	public ArrayList<Movie> initializeLibrary(String fileString) throws FileNotFoundException {
 		ArrayList<Movie> result = new ArrayList<Movie>();
@@ -51,8 +56,10 @@ public class MoviesRModel {
 			int year = Integer.valueOf(dateNumbers[2]);
 			Date movieReleaseDate = new Date(month, day, year);
 
+
 			int runtime = Integer.valueOf(cols[4]);
-			result.add(new Movie(movieName, movieDirector, movieGenre, movieReleaseDate, runtime));
+			String location = cols[5];
+			result.add(new Movie(movieName, movieDirector, movieGenre, movieReleaseDate, runtime,location));
 		}
         return result;
     }
@@ -64,7 +71,7 @@ public class MoviesRModel {
 	}
 	public ArrayList<Movie> getMovies() {
 		return this.movies;
-	} 
+	}
 	public ArrayList<Movie> getMyList(){
 		return this.myList;
 	}
@@ -74,11 +81,12 @@ public class MoviesRModel {
 	public void setMyList(ArrayList<Movie> myList) {
 		this.myList = myList;
 	}
-	
-	
-	
-	
-	
-	
-	
+	public View getViewMode() {
+		return viewMode;
+	}
+
+	public void setViewMode(View viewMode) {
+		this.viewMode = viewMode;
+	}
+
 }

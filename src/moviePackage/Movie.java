@@ -4,7 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Movie {
-	public enum Genre{
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public enum Genre{
 		HORROR, SCIFI, WESTERN, FANTASY, ADVENTURE, ACTION, COMEDY, NONE
 	}
 	public enum Rating{
@@ -20,9 +28,10 @@ public class Movie {
 	private Date releaseDate;
 	private int runtime;
 	private Genre genre;
+	private String location;
 	
 	
-	Movie(String name, String director, Genre genre, Date date, int runtime){
+	Movie(String name, String director, Genre genre, Date date, int runtime, String location){
 		this.name = name;
 		this.director = director;
 		this.releaseDate = date;
@@ -63,9 +72,11 @@ public class Movie {
 		this.name = name;
 	}
 	public void setRelease(Date date) {
+
 		this.releaseDate = date;
 	}
-	public void setRuntime(int runtime) {
+	public void setRuntime(int runtime)
+	{
 		this.runtime = runtime;
 	}
 	public void setGenre(Genre genre) {

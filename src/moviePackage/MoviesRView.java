@@ -9,6 +9,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
@@ -26,13 +28,6 @@ public class MoviesRView extends Application implements Observer {
 		VBox controlTabs = new VBox(9);
 
 		/*
-		For the Top of the BorderPane
-		 */
-		GridPane topGrid = new GridPane(1000, 200);
-		topGrid.setVgap(200);
-		topGrid.setPadding(new Insets(20));
-
-		/*
 		Grid of movies
 		 */
 		GridPane movieGrid = new GridPane();
@@ -44,7 +39,7 @@ public class MoviesRView extends Application implements Observer {
 		/*
 		scrollPane for the movieGrid
 		 */
-		ScrollPane centerScroll = new ScrollPane(movieGrid);
+		ScrollPane centerScroll = createCarousel("Movies that are Terminator", model.getMovies());
 		int rowNumber = 0;
 		int colNumber = 0;
 
@@ -73,7 +68,6 @@ public class MoviesRView extends Application implements Observer {
 		}
 
 
-		root.setTop(topGrid);
 		root.setCenter(centerScroll);
 
 
@@ -103,5 +97,28 @@ public class MoviesRView extends Application implements Observer {
 		movieCover.setScaleY(30);
 		movieCover.setScaleX(15);
 		return movieCover;
+	}
+	/*
+	carousel refers to the sidways scrolling rows in the ui of the main screen
+
+		ScrollPane(The whole thing) --> VBox(Label) --> HBox(Movies)
+	 */
+	public ScrollPane createCarousel(String title, ArrayList<Movie> movieArr){
+		 Label carouselTitle = new Label(title);
+		 carouselTitle.setMinSize(40, 40);
+		 VBox  components = new VBox(20);
+		 HBox carouselMovie = new HBox(20);
+
+		 components.getChildren().addAll(carouselTitle);
+
+		 for(int i = 0 ; i < movieArr.size(); i++){
+			Image image = new Image("/Users/aleksantiago/Desktop/MoviesRBackAssets/Terminator.jpg");
+			ImageView imageView = new ImageView(image);
+			carouselMovie.getChildren().add(imageView);
+		 }
+		 components.getChildren().addAll(carouselTitle, carouselMovie);
+		ScrollPane carouselPane = new ScrollPane(components);
+
+		return carouselPane;
 	}
 }
