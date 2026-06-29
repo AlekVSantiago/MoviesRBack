@@ -19,10 +19,9 @@ import javafx.scene.paint.*;
 public class MoviesRView extends Application implements Observer {
 	@Override
 	public void start(Stage arg0) throws Exception {
-
 		MoviesRModel model = new MoviesRModel("/Users/aleksantiago/Desktop/spreadSheets/Movies.csv");
 		MoviesRController controller = new MoviesRController(model);
-		ArrayList<Movie> library = controller.getModel().getMovies();
+		ArrayList<Movie> library = controller.getModel().getLibrary();
 		BorderPane root = new BorderPane();
 		//Meant for the side of the screen, This is for things like search, home, settings, etc
 		VBox controlTabs = new VBox(9);
@@ -39,19 +38,14 @@ public class MoviesRView extends Application implements Observer {
 		/*
 		scrollPane for the movieGrid
 		 */
-		ScrollPane centerScroll = createCarousel("Movies that are Terminator", model.getMovies());
-		int rowNumber = 0;
-		int colNumber = 0;
+
 
 		for(int i = 0; i < library.size(); i++){
 			StackPane movieDisplay = new StackPane();
 			/*TODO
-			Make this into a legitimate poster
+			Make this into a legitimate poster via just grabbing it from somewhere in the computer/ server
 			  */
-			Rectangle posterPlaceHolder = new Rectangle(100, 200);
-			posterPlaceHolder.setFill(Color.BEIGE);
-			posterPlaceHolder.setStroke(Color.BLUE);
-			posterPlaceHolder.setStrokeWidth(3);
+
 
 			Label movieLabel = new Label(library.get(i).getName());
 			movieLabel.setMaxWidth(60);
@@ -98,21 +92,30 @@ public class MoviesRView extends Application implements Observer {
 		movieCover.setScaleX(15);
 		return movieCover;
 	}
+
+    /**
+     * @param
+     * @param movieArr
+     * @return
+     */
 	/*
 	carousel refers to the sidways scrolling rows in the ui of the main screen
 
 		ScrollPane(The whole thing) --> VBox(Label) --> HBox(Movies)
 	 */
-	public ScrollPane createCarousel(String title, ArrayList<Movie> movieArr){
+	public displayCarousel(String title, ArrayList<Movie> movieArr){
 		 Label carouselTitle = new Label(title);
 		 carouselTitle.setMinSize(40, 40);
 		 VBox  components = new VBox(20);
 		 HBox carouselMovie = new HBox(20);
 
+
+		 String locationString = "This String should be changed from this";
 		 components.getChildren().addAll(carouselTitle);
 
 		 for(int i = 0 ; i < movieArr.size(); i++){
-			Image image = new Image("/Users/aleksantiago/Desktop/MoviesRBackAssets/Terminator.jpg");
+			locationString = movieArr.get(i).getMovieLocation();
+			Image image = new Image(movieArr.get(i).getMovieLocation());
 			ImageView imageView = new ImageView(image);
 			carouselMovie.getChildren().add(imageView);
 		 }

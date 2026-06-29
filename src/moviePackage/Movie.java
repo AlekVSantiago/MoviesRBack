@@ -1,16 +1,18 @@
 package moviePackage;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Movie {
-    public String getLocation() {
-        return location;
-    }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+	private String director;
+	private Date releaseDate;
+	private int runtime;
+	private Genre genre;
+	private String movieLocation;
+
+
+
+	private String posterLocation;
 
     public enum Genre{
 		HORROR, SCIFI, WESTERN, FANTASY, ADVENTURE, ACTION, COMEDY, NONE
@@ -22,16 +24,7 @@ public class Movie {
 	
 	private String name;
 
-
-
-	private String director;
-	private Date releaseDate;
-	private int runtime;
-	private Genre genre;
-	private String location;
-	
-	
-	Movie(String name, String director, Genre genre, Date date, int runtime, String location){
+	Movie(String name, String director, Genre genre, Date date, int runtime, String movieLocation){
 		this.name = name;
 		this.director = director;
 		this.releaseDate = date;
@@ -82,7 +75,22 @@ public class Movie {
 	public void setGenre(Genre genre) {
 		this.genre = genre;
 	}
-	
+
+	public String getMovieLocation() {
+		return movieLocation;
+	}
+
+	public void setMovieLocation(String movieLocation) {
+		this.movieLocation = movieLocation;
+	}
+
+	public String getPosterLocation() {
+		return posterLocation;
+	}
+
+	public void setPosterLocation(String posterLocation) {
+		this.posterLocation = posterLocation;
+	}
 	
 	public static void main(String[] args) {
 		
